@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "linux-base",
+            "description": "Base Linux preset",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}"
+        },
+        {
+            "name": "linux-debug",
+            "displayName": "Linux Debug",
+            "description": "GCC Linux build",
+            "inherits": "linux-base",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default-build-linux",
+            "displayName": "Default",
+            "configurePreset": "linux-debug",
+            "description": "Vanilla build"
+        }
+    ],
+    "testPresets": []
+}
