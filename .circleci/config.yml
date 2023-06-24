@@ -1,0 +1,44 @@
+version: 2.1
+executors:
+  docker-executor:
+    docker:
+      - image: krztybkrr/animboom:gcc
+
+jobs:
+  build:
+    executor: docker-executor
+    steps:
+      - checkout
+      - run:
+          name: Create build directories
+          command: |
+            mkdir -p build
+      - run:
+          name: Setup cmake and build artifacts
+          command: |
+            cd build
+            cmake .. -DENABLE_TESTS=ON
+            cmake --build . --config Release
+      - persist_to_workspace:
+          root: .
+          paths: [build]
+
+  test:
+    executor: docker-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run ctest
+          command: |
+            cd build
+            ctest
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
