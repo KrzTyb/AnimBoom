@@ -9,18 +9,20 @@
  */
 
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
-#include <vector>
 
 int main(int argc, char *argv[]) {
 
   QGuiApplication app(argc, argv);
 
+  QGuiApplication::setWindowIcon(QIcon(":/assets/logo/logo.ico"));
+
   QQmlApplicationEngine engine;
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
       []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
-  engine.loadFromModule("AnimBoom", "Main");
+  engine.loadFromModule("ui", "Main");
 
   return QGuiApplication::exec();
 }

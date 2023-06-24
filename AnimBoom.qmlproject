@@ -1,0 +1,66 @@
+import QmlProject
+
+Project {
+    mainFile: "ui/MainView.qml"
+    mainUiFile: "ui/MainViewForm.ui.qml"
+
+    /* Include .qml, .js, and image files from current directory and subdirectories */
+    QmlFiles {
+        directory: "ui"
+    }
+
+    JavaScriptFiles {
+        directory: "ui"
+    }
+
+    ImageFiles {
+        directory: "assets"
+    }
+
+    Files {
+        filter: "*.conf"
+        files: ["qtquickcontrols2.conf"]
+    }
+
+    Files {
+        filter: "qmldir"
+        directory: "."
+    }
+
+    Files {
+        filter: "*.png;*.jpg;*.ico"
+    }
+
+    Environment {
+        QT_QUICK_CONTROLS_CONF: "ui/qtquickcontrols2.conf"
+        QT_AUTO_SCREEN_SCALE_FACTOR: "1"
+        QML_COMPAT_RESOLVE_URLS_ON_ASSIGNMENT: "1"
+        QT_LOGGING_RULES: "qt.qml.connections=false"
+        QT_ENABLE_HIGHDPI_SCALING: "0"
+    }
+
+    qt6Project: true
+
+    /* List of plugin directories passed to QML runtime */
+    importPaths: []
+
+    /* Required for deployment */
+    targetDirectory: "/opt/AnimBoomDesigner"
+
+    qdsVersion: "4.2"
+
+    quickVersion: "6.5"
+
+    /* If any modules the project imports require widgets (e.g. QtCharts), widgetApp must be true */
+    widgetApp: true
+
+    ShaderTool {
+        args: "-s --glsl \"100 es,120,150\" --hlsl 50 --msl 12"
+        files: [ "assets/shaders/*" ]
+    }
+
+    multilanguageSupport: true
+    supportedLanguages: ["en"]
+    primaryLanguage: "en"
+
+}

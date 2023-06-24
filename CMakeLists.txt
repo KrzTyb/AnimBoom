@@ -26,16 +26,19 @@ include(${CMAKE_CURRENT_LIST_DIR}/cmake/Macros.cmake)
 qt_standard_project_setup(REQUIRES 6.5)
 
 add_subdirectory(modules)
+add_subdirectory(ui)
 
 qt_add_executable(AnimBoomDesigner
     main.cpp
 )
 
-qt_add_qml_module(AnimBoomDesigner
-    URI AnimBoom
-    VERSION 1.0
-    QML_FILES Main.qml
+target_link_libraries(AnimBoomDesigner
+    PRIVATE
+        Qt6::Quick
+        uiplugin
 )
+
+add_subdirectory(assets)
 
 set_target_properties(AnimBoomDesigner PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER animboom.com
@@ -43,10 +46,6 @@ set_target_properties(AnimBoomDesigner PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
-)
-
-target_link_libraries(AnimBoomDesigner
-    PRIVATE Qt6::Quick
 )
 
 install(TARGETS AnimBoomDesigner
