@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2023 Krzysztof Tyburski
+
 cmake_minimum_required(VERSION 3.16)
 
 project(AnimBoom VERSION 0.1 LANGUAGES CXX)
