@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/Options.cmake)
+
 # TODO: Change it to target_compile_options
 if(MSVC)
     add_compile_options(/W3 /WX)
@@ -13,9 +15,17 @@ else()
     add_compile_options(-Wall -Wextra -Werror)
 endif()
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/FindPackages.cmake)
+
+if (${ENABLE_TESTS})
+    include(${CMAKE_CURRENT_LIST_DIR}/cmake/Testing.cmake)
+endif()
+
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/Macros.cmake)
 
 qt_standard_project_setup(REQUIRES 6.5)
+
+add_subdirectory(modules)
 
 qt_add_executable(AnimBoomDesigner
     main.cpp
