@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: GPL-3.0-only
 # Copyright (C) 2023 Krzysztof Tyburski
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.22)
 
-project(AnimBoom VERSION 0.1 LANGUAGES CXX)
+project(AnimBoom VERSION 0.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,6 +19,16 @@ else()
 endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/cmake/FindPackages.cmake)
+
+# Compile toolkit
+include(FetchContent)
+FetchContent_Declare(
+    Corrosion
+    GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
+    GIT_TAG v0.4.1
+)
+FetchContent_MakeAvailable(Corrosion)
+corrosion_import_crate(MANIFEST_PATH animboom-toolkit/Cargo.toml)
 
 if (${ENABLE_TESTS})
     include(${CMAKE_CURRENT_LIST_DIR}/cmake/Testing.cmake)
@@ -39,6 +49,7 @@ target_link_libraries(AnimBoomDesigner
     PRIVATE
         Qt6::Quick
         uiplugin
+        animboom-toolkit
 )
 
 add_subdirectory(assets)
