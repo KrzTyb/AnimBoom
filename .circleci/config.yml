@@ -10,6 +10,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Checkout submodules
+          command: |
+            git submodule sync
+            git submodule update --init
+      - run:
           name: Create build directories
           command: |
             mkdir -p build
