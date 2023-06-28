@@ -29,6 +29,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Corrosion)
 corrosion_import_crate(MANIFEST_PATH animboom-toolkit/Cargo.toml)
+corrosion_set_env_vars(animboom-toolkit TOOLKIT_BINDINGS_PATH=${CMAKE_CURRENT_BINARY_DIR}/include/toolkit)
 
 if (${ENABLE_TESTS})
     include(${CMAKE_CURRENT_LIST_DIR}/cmake/Testing.cmake)
@@ -50,6 +51,11 @@ target_link_libraries(AnimBoomDesigner
         Qt6::Quick
         uiplugin
         animboom-toolkit
+)
+
+target_include_directories(AnimBoomDesigner
+    PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}/include
 )
 
 add_subdirectory(assets)

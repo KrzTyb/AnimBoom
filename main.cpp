@@ -5,7 +5,11 @@
 #include <QIcon>
 #include <QQmlApplicationEngine>
 
+#include "toolkit/animboomtoolkit.h"
+
 int main(int argc, char *argv[]) {
+
+  qDebug() << "Toolkit version: " << ABT_get_version();
 
   QGuiApplication app(argc, argv);
 
