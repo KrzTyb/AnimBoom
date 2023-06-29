@@ -4,7 +4,7 @@
 import QmlProject
 
 Project {
-    mainFile: "ui/MainView.qml"
+    mainFile: "ui/App.qml"
     mainUiFile: "ui/MainViewForm.ui.qml"
 
     /* Include .qml, .js, and image files from current directory and subdirectories */
@@ -12,12 +12,20 @@ Project {
         directory: "ui"
     }
 
+    QmlFiles {
+        directory: "ui/widgets"
+    }
+
+    QmlFiles {
+        directory: "ui/utils"
+    }
+
     JavaScriptFiles {
         directory: "ui"
     }
 
     ImageFiles {
-        directory: "assets"
+        directory: "ui/assets"
     }
 
     Files {
@@ -31,11 +39,20 @@ Project {
     }
 
     Files {
+        filter: "*.qrc"
+        directory: "."
+    }
+
+    Files {
         filter: "*.png;*.jpg;*.ico"
     }
 
+    Files {
+        filter: "*.ttf;*.otf"
+    }
+
     Environment {
-        QT_QUICK_CONTROLS_CONF: "ui/qtquickcontrols2.conf"
+        QT_QUICK_CONTROLS_CONF: "qtquickcontrols2.conf"
         QT_AUTO_SCREEN_SCALE_FACTOR: "1"
         QML_COMPAT_RESOLVE_URLS_ON_ASSIGNMENT: "1"
         QT_LOGGING_RULES: "qt.qml.connections=false"
@@ -45,7 +62,7 @@ Project {
     qt6Project: true
 
     /* List of plugin directories passed to QML runtime */
-    importPaths: []
+    importPaths: [".", "ui", "ui/utils", "ui/widgets"]
 
     /* Required for deployment */
     targetDirectory: "/opt/AnimBoomDesigner"
@@ -59,7 +76,7 @@ Project {
 
     ShaderTool {
         args: "-s --glsl \"100 es,120,150\" --hlsl 50 --msl 12"
-        files: [ "assets/shaders/*" ]
+        files: [ "ui/assets/shaders/*" ]
     }
 
     multilanguageSupport: true

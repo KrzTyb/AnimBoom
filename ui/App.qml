@@ -4,9 +4,12 @@
 import QtQuick
 import QtQuick.Window
 
+import Utils
+
 Window {
-    width: 1920
-    height: 1080
+
+    width: Constants.width
+    height: Constants.height
     minimumHeight: 400
     minimumWidth: 400
 
