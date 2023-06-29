@@ -1,0 +1,3 @@
+Module utils
+singleton Constants 1.0 Constants.qml
+singleton FontContainer 1.0 FontContainer.qml

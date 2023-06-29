@@ -9,30 +9,56 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright (C) 2023 Krzysztof Tyburski
-
 import QtQuick
 import QtQuick.Controls
+import Widgets
+import Utils
 
-Rectangle {
-    anchors.fill: parent
-    color: "#2f2f2f"
+Page {
+    width: Constants.width
+    height: Constants.height
+
+    background: Rectangle {
+        color: "#2f2f2f"
+    }
+
+    header: Rectangle {
+        id: toolbar
+        height: 30
+        Image {
+            source: "assets/toolbar/ToolbarBackground.png"
+        }
+        Row {
+            anchors.fill: parent
+            ToolbarButton {
+                id: fileButton
+                height: 26
+                width: 70
+                text: qsTr("File")
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            ToolbarButton {
+                id: editButton
+                height: 26
+                width: 70
+                text: qsTr("Edit")
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            ToolbarButton {
+                id: helpButton
+                height: 26
+                width: 70
+                text: qsTr("Help")
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+    }
 
     Image {
         id: backgroundLogo
         anchors.centerIn: parent
-        source: "../assets/logo/logo.png"
+        source: "assets/logo/logo.png"
         fillMode: Image.PreserveAspectFit
         opacity: 0.2
-    }
-
-    Rectangle {
-        id: toolbar
-        x: 0
-        y: 0
-        width: parent.width
-        height: 30
-        color: "#232323"
-        border.color: "#91000000"
-        border.width: 1
     }
 }
