@@ -22,38 +22,7 @@ Page {
         color: "#2f2f2f"
     }
 
-    header: Rectangle {
-        id: toolbar
-        height: 30
-        Image {
-            source: "assets/toolbar/ToolbarBackground.png"
-        }
-        Row {
-            anchors.fill: parent
-            ToolbarButton {
-                id: fileButton
-                height: 26
-                width: 70
-                text: qsTr("File")
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            ToolbarButton {
-                id: editButton
-                height: 26
-                width: 70
-                text: qsTr("Edit")
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            ToolbarButton {
-                id: helpButton
-                height: 26
-                width: 70
-                text: qsTr("Help")
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
-    }
-
+    header: AppMenuBar {}
     Image {
         id: backgroundLogo
         anchors.centerIn: parent
