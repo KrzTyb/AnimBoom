@@ -14,7 +14,6 @@ qt6_add_qml_module(ui
     RESOURCES
         assets/logo/logo.ico
         assets/logo/logo.png
-        assets/toolbar/ToolbarBackground.png
 )
 
 add_subdirectory(Utils)

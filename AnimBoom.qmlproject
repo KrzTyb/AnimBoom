@@ -13,11 +13,11 @@ Project {
     }
 
     QmlFiles {
-        directory: "ui/widgets"
+        directory: "ui/Widgets"
     }
 
     QmlFiles {
-        directory: "ui/utils"
+        directory: "ui/Utils"
     }
 
     JavaScriptFiles {
@@ -62,7 +62,7 @@ Project {
     qt6Project: true
 
     /* List of plugin directories passed to QML runtime */
-    importPaths: [".", "ui", "ui/utils", "ui/widgets"]
+    importPaths: [".", "ui", "ui/Utils", "ui/Widgets"]
 
     /* Required for deployment */
     targetDirectory: "/opt/AnimBoomDesigner"

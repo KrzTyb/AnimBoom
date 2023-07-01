@@ -1,2 +1,4 @@
-Module widgets
-ToolbarButton 1.0 ToolbarButton.ui.qml
+Module Widgets
+AppMenuBar 1.0 AppMenuBar.qml
+AppMenu 1.0 AppMenu.qml
+AppMenuSeparator 1.0 AppMenuSeparator.qml
