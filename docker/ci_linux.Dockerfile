@@ -6,7 +6,7 @@ LABEL maintainer="krzysztof.tyb@gmail.com" \
 
 USER root
 
-RUN apt update; apt install -y wget libgl-dev libgtest-dev libgmock-dev;
+RUN apt update; apt install -y wget libgl-dev libgtest-dev libgmock-dev clang clang-format clang-tidy;
 
 # Rust
 ENV RUSTUP_HOME=/usr/local/rustup \
