@@ -2,9 +2,18 @@ version: 2.1
 executors:
   docker-executor:
     docker:
-      - image: krztybkrr/animboom:gcc
+      - image: krztybkrr/animboom:linux
 
 jobs:
+  files-format:
+    executor: docker-executor
+    steps:
+      - checkout
+      - run:
+          name: Run clang-format
+          command: |
+            python3 .ci/run-clang-format.py -r src
+
   build-tests:
     executor: docker-executor
     steps:
@@ -34,4 +43,5 @@ workflows:
   version: 2
   build-with-tests:
     jobs:
+      - files-format
       - build-tests
