@@ -7,44 +7,69 @@ import Delegates
 
 MenuBar {
     height: 30
-    AppMenu {
-        title: qsTr("File")
-
-        Action { text: qsTr("New project"); shortcut: "Ctrl+N"}
-        Action { text: qsTr("New window"); shortcut: "Ctrl+Shift+N"}
-        AppMenu {
-            title: qsTr("Open Recent")
-            Action { text: qsTr("Some project");}
-        }
-
-        AppMenuSeparator {}
-
-        Action { text: qsTr("Exit");}
-    }
-
-    AppMenu {
-        title: qsTr("Edit")
-
-        Action { text: qsTr("Undo"); shortcut: "Ctrl+Z"}
-        Action { text: qsTr("Redo"); shortcut: "Ctrl+Y"}
-
-        AppMenuSeparator {}
-
-        Action { text: qsTr("Cut"); shortcut: "Ctrl+X"}
-        Action { text: qsTr("Copy"); shortcut: "Ctrl+C"}
-        Action { text: qsTr("Paste"); shortcut: "Ctrl+V"}
-    }
-
-    AppMenu {
-        title: qsTr("Help")
-
-        Action { text: qsTr("About");}
-    }
-
-    delegate: MenuBarDelegate {}
 
     background: Image {
         height: parent.height + 10 // Add 10 for shadow
         source: "assets/toolbar/ToolbarBackground.png"
+    }
+    delegate: MenuBarDelegate {
+    }
+
+    AppMenu {
+        title: qsTr("File")
+
+        Action {
+            shortcut: "Ctrl+N"
+            text: qsTr("New project")
+        }
+        Action {
+            shortcut: "Ctrl+Shift+N"
+            text: qsTr("New window")
+        }
+        AppMenu {
+            title: qsTr("Open Recent")
+
+            Action {
+                text: qsTr("Some project")
+            }
+        }
+        AppMenuSeparator {
+        }
+        Action {
+            text: qsTr("Exit")
+        }
+    }
+    AppMenu {
+        title: qsTr("Edit")
+
+        Action {
+            shortcut: "Ctrl+Z"
+            text: qsTr("Undo")
+        }
+        Action {
+            shortcut: "Ctrl+Y"
+            text: qsTr("Redo")
+        }
+        AppMenuSeparator {
+        }
+        Action {
+            shortcut: "Ctrl+X"
+            text: qsTr("Cut")
+        }
+        Action {
+            shortcut: "Ctrl+C"
+            text: qsTr("Copy")
+        }
+        Action {
+            shortcut: "Ctrl+V"
+            text: qsTr("Paste")
+        }
+    }
+    AppMenu {
+        title: qsTr("Help")
+
+        Action {
+            text: qsTr("About")
+        }
     }
 }

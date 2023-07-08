@@ -6,8 +6,8 @@ import QtQuick.Controls
 
 MenuSeparator {
     contentItem: Rectangle {
-        implicitHeight: 2
         color: "#000000"
+        implicitHeight: 2
         opacity: 0.2
     }
 }

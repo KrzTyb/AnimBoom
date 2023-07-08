@@ -1,5 +1,3 @@
-
-
 /*
 This is a UI file (.ui.qml) that is intended to be edited in Qt Design Studio only.
 It is supposed to be strictly declarative and only uses a subset of QML. If you edit
@@ -15,19 +13,21 @@ import Widgets
 import Utils
 
 Page {
-    width: Constants.width
     height: Constants.height
+    width: Constants.width
 
     background: Rectangle {
         color: "#2f2f2f"
     }
+    header: AppMenuBar {
+    }
 
-    header: AppMenuBar {}
     Image {
         id: backgroundLogo
+
         anchors.centerIn: parent
-        source: "assets/logo/logo.png"
         fillMode: Image.PreserveAspectFit
         opacity: 0.2
+        source: "assets/logo/logo.png"
     }
 }
