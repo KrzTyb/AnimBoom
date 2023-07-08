@@ -13,6 +13,10 @@ jobs:
           name: Run clang-format
           command: |
             python3 .ci/run-clang-format.py -r src
+      - run:
+          name: Run qmlformat
+          command: |
+            python3 .ci/run-qmlformat.py -r main.qml ui
 
   build-tests:
     executor: docker-executor
