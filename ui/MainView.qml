@@ -4,5 +4,4 @@
 import QtQuick
 
 MainViewForm {
-
 }

@@ -5,26 +5,26 @@ import QtQuick.Controls
 
 MenuBarItem {
     id: menuBarItem
+
     height: 30
     width: 70
 
+    background: Rectangle {
+        anchors.verticalCenter: parent.verticalCenter
+        color: menuBarItem.highlighted ? "#383838" : "transparent"
+        height: parent.height - 4
+        opacity: enabled ? 1 : 0.3
+        radius: 20
+    }
     contentItem: Text {
         id: textItem
-        text: menuBarItem.text
 
-        opacity: enabled ? 1.0 : 0.3
         color: "#ffffff"
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        font.pointSize: 9
         font.family: "Libre Franklin"
-    }
-
-    background: Rectangle {
-        height: parent.height - 4
-        anchors.verticalCenter: parent.verticalCenter
+        font.pointSize: 9
+        horizontalAlignment: Text.AlignHCenter
         opacity: enabled ? 1 : 0.3
-        color: menuBarItem.highlighted ? "#383838" : "transparent"
-        radius: 20
+        text: menuBarItem.text
+        verticalAlignment: Text.AlignVCenter
     }
 }

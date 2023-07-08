@@ -6,24 +6,24 @@ import QtQuick.Controls
 import Delegates
 
 Menu {
-    title: ""
-    width: 296
+    bottomPadding: 2
     leftPadding: 2
     rightPadding: 2
+    title: ""
     topPadding: 2
-    bottomPadding: 2
-
-    delegate: MenuDelegate {}
+    width: 296
 
     background: Rectangle {
         color: "#232323"
 
         Rectangle {
-            color: "#00ffffff"
             anchors.fill: parent
             border.color: "#FF000000"
             border.width: 2
+            color: "#00ffffff"
             opacity: 0.45
         }
+    }
+    delegate: MenuDelegate {
     }
 }
