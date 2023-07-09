@@ -6,6 +6,9 @@ executors:
 
 jobs:
   files-format:
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
     executor: docker-executor
     steps:
       - checkout
@@ -19,6 +22,9 @@ jobs:
             python3 .ci/run-qmlformat.py -r main.qml ui
 
   build-tests:
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
     executor: docker-executor
     steps:
       - checkout
