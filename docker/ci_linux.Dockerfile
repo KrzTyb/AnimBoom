@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 LABEL maintainer="krzysztof.tyb@gmail.com" \
     description="Image to build AnimBoom Designer app on the CI" \
@@ -9,8 +9,8 @@ ARG QT_PATH=/opt/Qt
 ARG AQT_VERSION=3.1.6
 
 ARG PACKAGES="sudo git build-essential ninja-build openssh-client ca-certificates \
-    build-essential curl python3 locales patchelf \
-    wget libgl-dev libgtest-dev libgmock-dev clang clang-format clang-tidy"
+    curl python3 locales patchelf mesa-common-dev libgl1-mesa-dev libfontconfig1 libxkbcommon0 libfreetype6 \
+    libdbus-1-3 wget libgtest-dev libgmock-dev clang clang-format clang-tidy"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \

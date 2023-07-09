@@ -3,7 +3,7 @@
 # Update packages
 apt update
 
-# Install Qt dependencies
+# Install tool dependencies
 apt install -y git python3-pip libglib2.0-0
 
 # Install AQT tool

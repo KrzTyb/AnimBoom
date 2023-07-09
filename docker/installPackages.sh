@@ -4,7 +4,7 @@
 apt update
 
 # Install packages
-apt install -y --no-install-suggests --no-install-recommends $PACKAGES
+apt install -y $PACKAGES
 
 # Cleanup
 rm -rf /var/lib/apt/lists/*
