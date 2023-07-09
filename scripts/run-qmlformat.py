@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # SPDX-License-Identifier: GPL-3.0-only
 # Copyright (C) 2023 Krzysztof Tyburski
-"""CI script to run qmlformat
+"""Script to run qmlformat
 
 NOTE: Based on https://github.com/Sarcasm/run-clang-format, which is
 licensed under the MIT license (Copyright (c) 2017 Guillaume Papin).
