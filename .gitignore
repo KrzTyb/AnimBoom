@@ -85,3 +85,6 @@ out
 
 # User CMake presets
 CMakeUserPresets.json
+
+# clang-tidy out files
+clang-tidy-report.yaml
