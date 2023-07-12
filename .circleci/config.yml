@@ -14,10 +14,12 @@ jobs:
       - checkout
       - run:
           name: Run clang-format
+          when: always
           command: |
             python3 scripts/run-clang-format.py -r src
       - run:
           name: Run qmlformat
+          when: always
           command: |
             python3 scripts/run-qmlformat.py -r main.qml ui
 
@@ -28,6 +30,7 @@ jobs:
       CXX: /usr/bin/clang++
       CC: /usr/bin/clang
       CLANG_TIDY_REPORT: /tmp/reports/clang-tidy.yaml
+      QMLLINT_REPORT: /tmp/reports/qmllint-report.json
     executor: docker-linux
     steps:
       - checkout
@@ -49,6 +52,11 @@ jobs:
           name: Run clang-tidy
           command: |
             python3 scripts/clang-tidy-check.py --database=build/ -o $CLANG_TIDY_REPORT
+      - run:
+          name: Run qmllint
+          when: always
+          command: |
+            python3 scripts/qmllint-check.py -o $QMLLINT_REPORT
       - store_artifacts:
           path: /tmp/reports
           destination: reports

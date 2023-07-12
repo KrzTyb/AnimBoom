@@ -1,3 +1,3 @@
-Module Delegates
-MenuDelegate 1.0 MenuDelegate.qml
-MenuBarDelegate 1.0 MenuBarDelegate.qml
+module Delegates
+MenuDelegate MenuDelegate.qml
+MenuBarDelegate MenuBarDelegate.qml
