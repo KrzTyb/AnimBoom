@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 LABEL maintainer="krzysztof.tyb@gmail.com" \
-    description="Image to build AnimBoom Designer app on the CI" \
+    description="Image to build AnimBoom Designer app (Linux)" \
     version="1.0"
 
 ARG QT_VERSION=6.5.1
@@ -9,7 +9,7 @@ ARG QT_PATH=/opt/Qt
 ARG AQT_VERSION=3.1.6
 
 ARG PACKAGES="sudo git build-essential ninja-build openssh-client ca-certificates \
-    curl python3 locales patchelf mesa-common-dev libgl1-mesa-dev libfontconfig1 libxkbcommon0 libfreetype6 \
+    curl python3 python3-pip libglib2.0-0 locales patchelf mesa-common-dev libgl1-mesa-dev libfontconfig1 libxkbcommon0 libfreetype6 \
     libdbus-1-3 wget libgtest-dev libgmock-dev clang clang-format clang-tidy"
 
 ENV DEBIAN_FRONTEND=noninteractive \

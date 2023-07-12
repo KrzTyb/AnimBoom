@@ -3,9 +3,6 @@
 # Update packages
 apt update
 
-# Install tool dependencies
-apt install -y git python3-pip libglib2.0-0
-
 # Install AQT tool
 pip3 install --no-cache-dir "aqtinstall==$AQT_VERSION"
 
