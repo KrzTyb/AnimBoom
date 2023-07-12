@@ -2,7 +2,6 @@
 // Copyright (C) 2023 Krzysztof Tyburski
 import QtQuick
 import QtQuick.Controls
-import Utils
 
 MenuItem {
     id: menuItem
