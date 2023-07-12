@@ -185,9 +185,10 @@ def main():
     (success, json_result) = process_output(outs, errs)
     if not success:
         retcode = ReturnCode.ERROR
-    
-    with open(args.o, "w") as outfile:
-        json.dump(json_result, outfile, indent=2)
+        with open(args.o, "w") as outfile:
+            json.dump(json_result, outfile, indent=2)
+    else:
+        print("Success")
     
     return retcode
 
