@@ -31,14 +31,14 @@ class ExitStatus:
     SUCCESS = 0
     DIFF = 1
     TROUBLE = 2
-    
+
 class Config:
     args = None
     parser = None
     colored_stderr = False
     njobs = 0
     files = []
-    
+
     def configure(self):
         self.colored_stdout = False
         self.colored_stderr = False
@@ -48,7 +48,7 @@ class Config:
         elif self.args.color == 'auto':
             self.colored_stdout = sys.stdout.isatty()
             self.colored_stderr = sys.stderr.isatty()
-        
+
         self.njobs = self.args.j
         if self.njobs == 0:
             self.njobs = multiprocessing.cpu_count() + 1
@@ -130,13 +130,13 @@ class UnexpectedError(Exception):
 def run_clang_format_diff_wrapper(args, file):
 
     command = [args.clang_format_executable]
-    
+
     if args.in_place:
         command.extend(['-i'])
-        
+
     if args.style:
         command.extend(['--style', args.style])
-    
+
     command.extend([file])
 
     if args.dry_run:
@@ -154,14 +154,14 @@ def run_clang_format_diff_wrapper(args, file):
 
 
 def run_qmlformat_diff_wrapper(args, file):
-    
+
     command = [args.executable, '-n']
-    
+
     if args.in_place:
         command.extend(['-i'])
-    
+
     command.extend([file])
-    
+
     try:
         ret = run_format_diff(args, file, command)
         return ret
@@ -288,7 +288,7 @@ def add_standard_arguments(parser):
         help='run N jobs in parallel'
         ' (default number of cpus + 1)')
     parser.add_argument('files', metavar='file', nargs='+')
-    
+
 
 def config_signal_handling():
     # use default signal handling, like diff return SIGINT value on ^C
@@ -304,7 +304,7 @@ def config_signal_handling():
 
 def verify_command_binary(config, version_invocation):
     assert config.parser, "Missing parser"
-    
+
     try:
         subprocess.check_call(version_invocation, stdout=DEVNULL)
     except subprocess.CalledProcessError as e:
@@ -333,11 +333,11 @@ def run_tool(config, function):
         it = pool.imap_unordered(
             partial(function, config.args), config.files)
         pool.close()
-    
+
     return (pool, it)
 
 def check_results(config, pool, results):
-    
+
     retcode = ExitStatus.SUCCESS
     while True:
         try:

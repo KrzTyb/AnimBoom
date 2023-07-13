@@ -20,4 +20,3 @@ target_link_libraries(Widgets PRIVATE
     Utilsplugin
     Delegatesplugin
 )
-

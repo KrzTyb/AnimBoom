@@ -41,4 +41,3 @@ endfunction(app_add_shared_library)
 function(app_add_interface_library)
     _app_add_library(${ARGN} TYPE INTERFACE)
 endfunction(app_add_interface_library)
-

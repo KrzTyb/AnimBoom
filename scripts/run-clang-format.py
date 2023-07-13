@@ -22,7 +22,7 @@ DEFAULT_CLANG_FORMAT_IGNORE = '.clang-format-ignore'
 
 def main():
     config = Config()
-    
+
     parser = argparse.ArgumentParser(description=__doc__)
     add_standard_arguments(parser)
     parser.add_argument(
@@ -48,7 +48,7 @@ def main():
     config.parser = parser
 
     config_signal_handling()
-    
+
     excludes = excludes_from_file(DEFAULT_CLANG_FORMAT_IGNORE)
     excludes.extend(config.args.exclude)
 
@@ -59,12 +59,12 @@ def main():
         extensions=config.args.extensions.split(','))
 
     config.configure()
-    
+
     version_invocation = [config.args.clang_format_executable, str("--version")]
 
     if verify_command_binary(config, version_invocation) != ExitStatus.SUCCESS:
         return ExitStatus.TROUBLE
-    
+
     if not config.files:
         return
 
