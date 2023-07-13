@@ -21,4 +21,3 @@ qt6_add_qml_module(Utils
     RESOURCES
         fonts/LibreFranklin/LibreFranklin-Medium.ttf
 )
-

@@ -33,21 +33,21 @@ def parse_arguments():
         metavar='OUTPUT',
         default='clang-tidy.yaml',
         help='Output file (YAML)')
-    
+
     return parser.parse_args()
 
 def main():
-    
+
     args = parse_arguments()
-    
-    pattern = r"^(?!.*[/\\]({})[/\\]).*$".format(exclude_dirs) 
+
+    pattern = r"^(?!.*[/\\]({})[/\\]).*$".format(exclude_dirs)
 
     command = [args.executable]
 
     command.extend(['-p', args.database])
     command.extend(['-j', str(args.j)])
     command.extend(['-export-fixes', args.o, pattern])
-    
+
     try:
         proc = subprocess.Popen(
             command,
@@ -64,4 +64,3 @@ def main():
 
 if __name__ == '__main__':
     sys.exit(main())
-    

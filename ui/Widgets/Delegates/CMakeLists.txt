@@ -18,4 +18,3 @@ qt6_add_qml_module(Delegates
 target_link_libraries(Delegates PRIVATE
     Utilsplugin
 )
-

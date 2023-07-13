@@ -35,15 +35,15 @@ def parse_arguments():
         metavar='OUTPUT',
         default='qmllint-report.json',
         help='Output file (JSON)')
-    
+
     return parser.parse_args()
 
 
 def find_qmldir_files(root_path):
-    
+
     qmldir_name = "qmldir"
     out = []
-    
+
     if os.path.isdir(root_path):
         if os.path.basename(root_path) in exclude_dirs:
             return out
@@ -61,9 +61,9 @@ def find_qmldir_files(root_path):
 
 
 def find_qml_files(root_path):
-    
+
     out = []
-    
+
     if os.path.isdir(root_path):
         for dirpath, dirs, fnames in os.walk(root_path):
             dirs[:] = list(filter(lambda x: not x in exclude_dirs, dirs))
@@ -85,16 +85,16 @@ def print_err(message):
 
 
 def run_lint(executable, qmldir_files, qml_files):
-    
+
     command = [executable]
-    
+
     command.extend(['--json', '-'])
-    
+
     for qmldir_file in qmldir_files:
         command.extend(['-i', qmldir_file])
-        
+
     command.extend(qml_files)
-    
+
     try:
         proc = subprocess.Popen(
             command,
@@ -108,11 +108,11 @@ def run_lint(executable, qmldir_files, qml_files):
             )
         )
 
-    
+
     outs = proc.stdout.read()
     errs = proc.stderr.read()
     proc.wait()
-    
+
     return outs, errs
 
 
@@ -130,25 +130,25 @@ def print_warnings(file_name, file_warnings):
             line = str(warning["line"])
         if "message" in warning:
             message = warning["message"]
-    
+
 
         print_type = sys.stdout
         if is_error:
             print_type = sys.stderr
 
         print("{}:{}:[{}]: {}".format(file_name, line, id_warning, message), file = print_type)
-            
+
 
 def process_output(outs, errs):
-    
+
     result = {}
-    
+
     if errs:
         print("Errors: {}".format(errs), file=sys.stderr)
         return False
-    
+
     success = False
-    
+
     try:
         result = json.loads(outs)
         success = True
@@ -158,30 +158,30 @@ def process_output(outs, errs):
                     success = False
                 if isinstance(item.get("warnings"), list) and "filename" in item:
                     print_warnings(item["filename"], item["warnings"])
-                    
+
         else:
             print("Missing keys in output. Out: {}".format(outs))
-        
+
     # If the string is not a correct json then an error occurred on the stderr
     except json.JSONDecodeError as decode_error:
         print("Error: {}".format(decode_error.msg), file=sys.stderr)
-    
+
     return success, result
 
-def main():    
-    
+def main():
+
     args = parse_arguments()
 
     qmldir_files = find_qmldir_files(args.root_path)
     qml_files = find_qml_files(args.root_path)
-    
+
     if not qml_files:
         return
-    
+
     (outs, errs) = run_lint(args.executable, qmldir_files, qml_files)
-    
+
     retcode = ReturnCode.SUCCESS
-    
+
     (success, json_result) = process_output(outs, errs)
     if not success:
         retcode = ReturnCode.ERROR
@@ -189,7 +189,7 @@ def main():
             json.dump(json_result, outfile, indent=2)
     else:
         print("Success")
-    
+
     return retcode
 
 
