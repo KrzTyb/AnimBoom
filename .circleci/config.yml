@@ -5,6 +5,17 @@ executors:
       - image: krztybkrr/animboom:linux
 
 jobs:
+
+  pre-commit:
+    executor: docker-linux
+    steps:
+      - checkout
+      - run:
+          name: Run pre-commit hooks
+          command: |
+            pre-commit install
+            pre-commit run --show-diff-on-failure
+
   files-format:
     environment:
       LC_ALL: C.UTF-8
@@ -88,6 +99,7 @@ workflows:
   version: 2
   linux:
     jobs:
+      - pre-commit
       - files-format
       - build-linux
       - static-analysis
