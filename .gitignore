@@ -74,6 +74,9 @@ AnimBoom.qmlproject.qtds
 *.pyc
 __pycache__
 
+# Python venv
+.venv
+
 # Binaries
 # --------
 *.dll
