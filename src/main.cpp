@@ -11,45 +11,45 @@ void set_qt_environment();
 
 int main(int argc, char *argv[]) {
 
-  set_qt_environment();
+    set_qt_environment();
 
-  qDebug() << "Toolkit version: " << ABT_get_version();
+    qDebug() << "Toolkit version: " << ABT_get_version();
 
-  QGuiApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
-  QGuiApplication::setWindowIcon(QIcon(":/ui/assets/logo/logo.ico"));
+    QGuiApplication::setWindowIcon(QIcon(":/ui/assets/logo/logo.ico"));
 
-  QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine;
 
-  const QUrl url{QStringLiteral("Main/main.qml")};
+    const QUrl url{QStringLiteral("Main/main.qml")};
 
-  QObject::connect(
-      &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
-      []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
+    QObject::connect(
+        &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+        []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
 
-  QObject::connect(
-      &engine, &QQmlApplicationEngine::objectCreated, &app,
-      [url](QObject *obj, const QUrl &objUrl) {
-        if ((obj == nullptr) && url == objUrl) {
-          QCoreApplication::exit(-1);
-        }
-      },
-      Qt::QueuedConnection);
+    QObject::connect(
+        &engine, &QQmlApplicationEngine::objectCreated, &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if ((obj == nullptr) && url == objUrl) {
+                QCoreApplication::exit(-1);
+            }
+        },
+        Qt::QueuedConnection);
 
-  engine.addImportPath(":/");
-  engine.load(url);
+    engine.addImportPath(":/");
+    engine.load(url);
 
-  if (engine.rootObjects().isEmpty()) {
-    return -1;
-  }
+    if (engine.rootObjects().isEmpty()) {
+        return -1;
+    }
 
-  return QGuiApplication::exec();
+    return QGuiApplication::exec();
 }
 
 void set_qt_environment() {
-  qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
-  qputenv("QT_ENABLE_HIGHDPI_SCALING", "0");
-  qputenv("QT_LOGGING_RULES", "qt.qml.connections=false");
-  qputenv("QT_QUICK_CONTROLS_CONF", ":/qtquickcontrols2.conf");
-  qputenv("QML_COMPAT_RESOLVE_URLS_ON_ASSIGNMENT", "1");
+    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+    qputenv("QT_ENABLE_HIGHDPI_SCALING", "0");
+    qputenv("QT_LOGGING_RULES", "qt.qml.connections=false");
+    qputenv("QT_QUICK_CONTROLS_CONF", ":/qtquickcontrols2.conf");
+    qputenv("QML_COMPAT_RESOLVE_URLS_ON_ASSIGNMENT", "1");
 }

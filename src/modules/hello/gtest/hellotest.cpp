@@ -6,8 +6,8 @@
 
 // Demonstrate some basic assertions.
 TEST(HelloAnimBoom, BasicAssertions) {
-  // Expect two strings not to be equal.
-  EXPECT_STRNE("hello", "AnimBoom");
-  // Expect equality.
-  EXPECT_EQ(7 * 6, 42);
+    // Expect two strings not to be equal.
+    EXPECT_STRNE("hello", "AnimBoom");
+    // Expect equality.
+    EXPECT_EQ(7 * 6, 42);
 }
