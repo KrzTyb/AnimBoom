@@ -60,6 +60,7 @@ qt6_add_qml_module(${CMAKE_PROJECT_NAME}
         main.qml
 )
 
+add_subdirectory(plugins)
 add_subdirectory(ui)
 add_subdirectory(src)
 

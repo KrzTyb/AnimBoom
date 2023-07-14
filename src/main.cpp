@@ -7,11 +7,18 @@
 
 #include "toolkit/animboomtoolkit.h"
 
+#include <QDirIterator>
+
 void set_qt_environment();
 
 int main(int argc, char *argv[]) {
 
     set_qt_environment();
+
+    QDirIterator iter(":", QDirIterator::Subdirectories);
+    while (iter.hasNext()) {
+        qDebug() << iter.next();
+    }
 
     qDebug() << "Toolkit version: " << ABT_get_version();
 

@@ -19,4 +19,5 @@ qt6_add_qml_module(Widgets
 target_link_libraries(Widgets PRIVATE
     Utilsplugin
     Delegatesplugin
+    Logicplugin
 )

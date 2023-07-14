@@ -4,6 +4,7 @@
 import QtQuick
 import QtQuick.Controls
 import Delegates
+import Logic
 
 MenuBar {
     height: 30
@@ -21,6 +22,7 @@ MenuBar {
         Action {
             shortcut: "Ctrl+N"
             text: qsTr("New project")
+            onTriggered: BusinessLogic.menuBarHandler.newProject()
         }
         Action {
             shortcut: "Ctrl+Shift+N"
