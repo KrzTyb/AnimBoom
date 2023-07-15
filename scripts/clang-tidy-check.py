@@ -32,11 +32,6 @@ def parse_arguments():
         default=0,
         help='run N jobs in parallel'
         ' (default number of cpus + 1)')
-    parser.add_argument(
-        '-o',
-        metavar='OUTPUT',
-        default='clang-tidy.yaml',
-        help='Output file (YAML)')
 
     return parser.parse_args()
 
@@ -50,7 +45,7 @@ def main():
 
     command.extend(['-p', args.database])
     command.extend(['-j', str(args.j)])
-    command.extend(['-export-fixes', args.o, pattern])
+    command.extend([pattern])
 
     try:
         proc = subprocess.Popen(

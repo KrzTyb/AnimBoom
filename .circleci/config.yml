@@ -40,7 +40,6 @@ jobs:
       LANG: C.UTF-8
       CXX: /usr/bin/clang++
       CC: /usr/bin/clang
-      CLANG_TIDY_REPORT: /tmp/reports/clang-tidy.yaml
     executor: docker-linux
     steps:
       - checkout
@@ -60,16 +59,9 @@ jobs:
           command: |
             cmake --build build --target all_qmllint
       - run:
-          name: Create reports directory
-          command: |
-            mkdir -p /tmp/reports
-      - run:
           name: Run clang-tidy
           command: |
-            python3 scripts/clang-tidy-check.py --database build/ -e build -o $CLANG_TIDY_REPORT
-      - store_artifacts:
-          path: /tmp/reports
-          destination: reports
+            python3 scripts/clang-tidy-check.py --database build/ -e build
 
   build-linux:
     environment:
