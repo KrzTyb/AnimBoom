@@ -41,3 +41,8 @@ endfunction(app_add_shared_library)
 function(app_add_interface_library)
     _app_add_library(${ARGN} TYPE INTERFACE)
 endfunction(app_add_interface_library)
+
+# Add current source / binary dir to QML imports
+macro(append_qml_import_path)
+    set(QML_IMPORT_PATH ${QML_IMPORT_PATH} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} CACHE STRING "" FORCE)
+endmacro(append_qml_import_path)

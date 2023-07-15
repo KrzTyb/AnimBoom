@@ -22,7 +22,8 @@ MenuBar {
         Action {
             shortcut: "Ctrl+N"
             text: qsTr("New project")
-            onTriggered: BusinessLogic.menuBarHandler.newProject()
+
+            onTriggered: MenuBarHandler.newProject()
         }
         Action {
             shortcut: "Ctrl+Shift+N"

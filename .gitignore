@@ -41,6 +41,7 @@ CMakeLists.txt.user*
 
 # Qt Design Studio generated files
 AnimBoom.qmlproject.qtds
+CMakeLists.txt.qtds
 
 # xemacs temporary files
 *.flc

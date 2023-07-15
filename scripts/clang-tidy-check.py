@@ -6,9 +6,6 @@ import argparse
 import subprocess
 import sys
 
-exclude_dirs = "build|out"
-
-
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Run clang-tidy")
     parser.add_argument(
@@ -21,6 +18,13 @@ def parse_arguments():
         metavar='DATABASE',
         help='path to the compile_commands.json dir',
         default='.')
+    parser.add_argument(
+        '-e',
+        '--exclude',
+        metavar='EXCLUDE',
+        help='Exclude directory',
+        action='append',
+        default=[])
     parser.add_argument(
         '-j',
         metavar='N',
@@ -40,7 +44,7 @@ def main():
 
     args = parse_arguments()
 
-    pattern = r"^(?!.*[/\\]({})[/\\]).*$".format(exclude_dirs)
+    pattern = r"^(?!.*[/\\]({})[/\\]).*$".format('|'.join(args.exclude))
 
     command = [args.executable]
 

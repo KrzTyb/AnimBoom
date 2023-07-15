@@ -13,8 +13,6 @@ set_source_files_properties(FontContainer.qml PROPERTIES
 qt6_add_qml_module(Utils
     URI "Utils"
     VERSION 1.0
-    RESOURCE_PREFIX
-        /
     QML_FILES
         Constants.qml
         FontContainer.qml
