@@ -1,4 +1,0 @@
-module Widgets
-AppMenuBar AppMenuBar.qml
-AppMenu AppMenu.qml
-AppMenuSeparator AppMenuSeparator.qml

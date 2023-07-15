@@ -7,28 +7,21 @@
 
 #include "toolkit/animboomtoolkit.h"
 
-#include <QDirIterator>
-
 void set_qt_environment();
 
 int main(int argc, char *argv[]) {
 
     set_qt_environment();
 
-    QDirIterator iter(":", QDirIterator::Subdirectories);
-    while (iter.hasNext()) {
-        qDebug() << iter.next();
-    }
-
     qDebug() << "Toolkit version: " << ABT_get_version();
 
     QGuiApplication app(argc, argv);
 
-    QGuiApplication::setWindowIcon(QIcon(":/ui/assets/logo/logo.ico"));
+    QGuiApplication::setWindowIcon(QIcon(":/qml/assets/logo/logo.ico"));
 
     QQmlApplicationEngine engine;
 
-    const QUrl url{QStringLiteral("Main/main.qml")};
+    const QUrl url{QStringLiteral("qrc:/qml/main.qml")};
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
@@ -43,6 +36,7 @@ int main(int argc, char *argv[]) {
         },
         Qt::QueuedConnection);
 
+    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
 

@@ -1,3 +1,0 @@
-module ui
-App App.qml
-MainView MainView.qml

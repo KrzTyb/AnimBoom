@@ -2,16 +2,26 @@
 // Copyright (C) 2023 Krzysztof Tyburski
 #pragma once
 
-#include <QtQuick/QQuickItem>
+#include <QObject>
+#include <QtQml/qqml.h>
 
-class MenuBarHandler : public QQuickItem {
+#include <QString>
+
+class MenuBarHandler : public QObject {
     // NOLINTNEXTLINE
     Q_OBJECT
+    QML_SINGLETON
     QML_ELEMENT
     Q_DISABLE_COPY(MenuBarHandler)
+
 public:
-    explicit MenuBarHandler(QQuickItem *parent = nullptr);
+    Q_PROPERTY(QString title MEMBER m_title)
+
+    explicit MenuBarHandler(QObject *parent = nullptr);
     ~MenuBarHandler() override = default;
 
     Q_INVOKABLE static void newProject();
+
+private:
+    QString m_title;
 };

@@ -2,10 +2,9 @@
 // Copyright (C) 2023 Krzysztof Tyburski
 
 #include "MenuBarHandler.hpp"
-#include <QtQuick/qquickitem.h>
 
 #include <QDebug>
 
-MenuBarHandler::MenuBarHandler(QQuickItem *parent) : QQuickItem(parent) {}
+MenuBarHandler::MenuBarHandler(QObject *parent) : QObject(parent) {}
 
 void MenuBarHandler::newProject() { qDebug() << "New Project clicked"; }
