@@ -12,6 +12,5 @@ qt6_add_qml_module(Content
         MainView.qml
 
     RESOURCES
-        assets/logo/logo.ico
         assets/logo/logo.png
 )

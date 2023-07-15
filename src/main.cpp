@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     QGuiApplication app(argc, argv);
 
-    QGuiApplication::setWindowIcon(QIcon(":/qml/assets/logo/logo.ico"));
+    QGuiApplication::setWindowIcon(QIcon(QStringLiteral(":/assets/logo.ico")));
 
     QQmlApplicationEngine engine;
 

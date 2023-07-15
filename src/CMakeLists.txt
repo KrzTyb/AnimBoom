@@ -10,6 +10,12 @@ qt6_add_resources(${CMAKE_PROJECT_NAME} "configuration"
         qtquickcontrols2.conf
 )
 
+qt_add_resources(${CMAKE_PROJECT_NAME} "assets"
+    PREFIX "/"
+    FILES
+        assets/logo.ico
+)
+
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     Qt6::Core
     Qt6::Gui
