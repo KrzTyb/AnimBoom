@@ -17,7 +17,7 @@ jobs:
           name: Run clang-format
           when: always
           command: |
-            python3 scripts/run-clang-format.py -r src
+            python3 scripts/run-clang-format.py -r src qml
       - run:
           name: Run qmlformat
           when: always
