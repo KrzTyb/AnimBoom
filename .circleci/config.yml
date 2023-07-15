@@ -6,16 +6,6 @@ executors:
 
 jobs:
 
-  pre-commit:
-    executor: docker-linux
-    steps:
-      - checkout
-      - run:
-          name: Run pre-commit hooks
-          command: |
-            pre-commit install
-            pre-commit run --show-diff-on-failure
-
   files-format:
     environment:
       LC_ALL: C.UTF-8
@@ -33,6 +23,16 @@ jobs:
           when: always
           command: |
             python3 scripts/run-qmlformat.py -r qml
+
+  pre-commit:
+    executor: docker-linux
+    steps:
+      - checkout
+      - run:
+          name: Run pre-commit hooks
+          command: |
+            pre-commit install
+            pre-commit run --show-diff-on-failure
 
   static-analysis:
     environment:
@@ -91,6 +91,12 @@ workflows:
   linux:
     jobs:
       - pre-commit
-      - files-format
-      - build-linux
-      - static-analysis
+      - files-format:
+          requires:
+            - pre-commit
+      - build-linux:
+          requires:
+            - files-format
+      - static-analysis:
+          requires:
+            - files-format
