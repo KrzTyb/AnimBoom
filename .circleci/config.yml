@@ -1,0 +1,102 @@
+version: 2.1
+executors:
+  docker-linux:
+    docker:
+      - image: krztybkrr/animboom:linux
+
+jobs:
+
+  files-format:
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    executor: docker-linux
+    steps:
+      - checkout
+      - run:
+          name: Run clang-format
+          when: always
+          command: |
+            python3 scripts/run-clang-format.py -r src QmlImports
+      - run:
+          name: Run qmlformat
+          when: always
+          command: |
+            python3 scripts/run-qmlformat.py -r QmlImports QmlContent
+
+  pre-commit:
+    executor: docker-linux
+    steps:
+      - checkout
+      - run:
+          name: Run pre-commit hooks
+          command: |
+            pre-commit install
+            pre-commit run --show-diff-on-failure
+
+  static-analysis:
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+      CXX: /usr/bin/clang++
+      CC: /usr/bin/clang
+    executor: docker-linux
+    steps:
+      - checkout
+      - run:
+          name: Checkout submodules
+          command: |
+            git submodule sync
+            git submodule update --init
+      - run:
+          name: Setup cmake and build
+          command: |
+            cmake -GNinja -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+            cmake --build build --config Debug
+      - run:
+          name: Run qmllint
+          when: always
+          command: |
+            cmake --build build --target all_qmllint
+      - run:
+          name: Run clang-tidy
+          command: |
+            python3 scripts/clang-tidy-check.py --database build/ -e build
+
+  build-linux:
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    executor: docker-linux
+    steps:
+      - checkout
+      - run:
+          name: Checkout submodules
+          command: |
+            git submodule sync
+            git submodule update --init
+      - run:
+          name: Setup cmake and build artifacts
+          command: |
+            cmake -GNinja -B build -DENABLE_TESTS=ON
+            cmake --build build --config RelWithDebInfo
+      - run:
+          name: Run ctest
+          command: |
+            cd build
+            ctest
+
+workflows:
+  version: 2
+  linux:
+    jobs:
+      - pre-commit
+      - files-format:
+          requires:
+            - pre-commit
+      - build-linux:
+          requires:
+            - files-format
+      - static-analysis:
+          requires:
+            - files-format
