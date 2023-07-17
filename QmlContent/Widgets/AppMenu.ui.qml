@@ -3,7 +3,7 @@
 
 import QtQuick
 import QtQuick.Controls
-import Delegates
+import "../Delegates"
 
 Menu {
     bottomPadding: 2

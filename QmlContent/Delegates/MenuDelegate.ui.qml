@@ -2,6 +2,7 @@
 // Copyright (C) 2023 Krzysztof Tyburski
 import QtQuick
 import QtQuick.Controls
+import Assets
 
 MenuItem {
     id: menuItem
@@ -13,7 +14,7 @@ MenuItem {
     arrow: Image {
         anchors.verticalCenter: parent.verticalCenter
         height: 7
-        source: "assets/ArrowRight.png"
+        source: Assets.arrowRightImage
         visible: menuItem.subMenu
         width: 7
         x: parent.width - width - 4

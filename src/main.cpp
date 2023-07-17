@@ -17,11 +17,12 @@ int main(int argc, char *argv[]) {
 
     QGuiApplication app(argc, argv);
 
-    QGuiApplication::setWindowIcon(QIcon(QStringLiteral(":/assets/logo.ico")));
+    QGuiApplication::setWindowIcon(
+        QIcon(QStringLiteral(":/assets/icons/logo.ico")));
 
     QQmlApplicationEngine engine;
 
-    const QUrl url{QStringLiteral("qrc:/qml/main.qml")};
+    const QUrl url{QStringLiteral("qrc:/Main/main.qml")};
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

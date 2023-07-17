@@ -1,0 +1,2 @@
+module Assets
+singleton Assets 1.0 Assets.qml

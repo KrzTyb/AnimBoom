@@ -1,0 +1,3 @@
+module Logic
+typeinfo Logic.qmltypes
+prefer :/qt/qml/Logic/
