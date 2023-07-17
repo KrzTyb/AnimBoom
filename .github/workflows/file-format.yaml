@@ -7,11 +7,19 @@ on:
     branches: [main]
 
 jobs:
-  clang-format:
+  file-format:
     runs-on: ubuntu-latest
     container:
         image: krztybkrr/animboom:linux
     steps:
       - uses: actions/checkout@v3
-      - run: |
-            python3 scripts/run-clang-format.py -r src QmlImports
+
+      - name: clang-format
+        if: always()
+        run: |
+          python3 scripts/run-clang-format.py -r src QmlImports
+
+      - name: qmlformat
+        if: always()
+        run: |
+          python3 scripts/run-qmlformat.py -r QmlImports QmlContent
