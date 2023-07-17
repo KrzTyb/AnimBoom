@@ -9,8 +9,9 @@ on:
 jobs:
   clang-format:
     runs-on: ubuntu-latest
-    container: krztybkrr/animboom:linux
+    container:
+        image: krztybkrr/animboom:linux
     steps:
       - uses: actions/checkout@v3
       - run: |
-            python3 scripts/run-clang-format.py -i -r src QmlImports
+            python3 scripts/run-clang-format.py -r src QmlImports
