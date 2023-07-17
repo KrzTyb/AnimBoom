@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     set_qt_environment();
 
-    qDebug() << "Toolkit version: " << ABT_get_version();
+    			qDebug() << "Toolkit version: " << ABT_get_version();
 
     QGuiApplication app(argc, argv);
 

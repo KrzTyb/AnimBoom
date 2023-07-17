@@ -1,0 +1,16 @@
+name: file-format
+
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main]
+
+jobs:
+  clang-format:
+    runs-on: ubuntu-latest
+    container: krztybkrr/animboom:linux
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+            python3 scripts/run-clang-format.py -i -r src QmlImports
