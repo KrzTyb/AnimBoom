@@ -4,6 +4,9 @@ LABEL maintainer="krzysztof.tyb@gmail.com" \
     description="Image to build AnimBoom Designer app (Linux)" \
     version="1.0"
 
+RUN groupadd --gid 1000 user \
+    && useradd --uid 1000 --gid user --shell /bin/bash --create-home user
+
 ARG QT_VERSION=6.5.1
 ARG QT_PATH=/opt/Qt
 ARG AQT_VERSION=3.1.6
@@ -42,8 +45,3 @@ RUN set -eux; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME;
 
 RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
-RUN groupadd -r user && useradd --create-home --gid user user && echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
-
-USER user
-WORKDIR /home/user
-ENV HOME /home/user
