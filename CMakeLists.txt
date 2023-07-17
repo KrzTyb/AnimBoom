@@ -46,7 +46,8 @@ set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
     FORCE
 )
 
-add_subdirectory(qml)
+add_subdirectory(QmlContent)
+add_subdirectory(QmlImports)
 add_subdirectory(src)
 
 target_include_directories(${CMAKE_PROJECT_NAME}

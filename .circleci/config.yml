@@ -17,12 +17,12 @@ jobs:
           name: Run clang-format
           when: always
           command: |
-            python3 scripts/run-clang-format.py -r src qml
+            python3 scripts/run-clang-format.py -r src QmlImports
       - run:
           name: Run qmlformat
           when: always
           command: |
-            python3 scripts/run-qmlformat.py -r qml
+            python3 scripts/run-qmlformat.py -r QmlImports QmlContent
 
   pre-commit:
     executor: docker-linux

@@ -2,7 +2,7 @@
 // Copyright (C) 2023 Krzysztof Tyburski
 
 pragma Singleton
-import QtQuick
+import QtQuick 6.5
 
 QtObject {
     readonly property int height: 1080

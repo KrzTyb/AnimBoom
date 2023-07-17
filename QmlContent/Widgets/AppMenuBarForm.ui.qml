@@ -1,17 +1,20 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright (C) 2023 Krzysztof Tyburski
-
 import QtQuick
 import QtQuick.Controls
-import Delegates
-import Logic
+import "../Delegates"
+import Assets
 
 MenuBar {
+    id: menuBar
+
+    property alias newProjectAction: newProjectAction
+
     height: 30
 
     background: Image {
-        height: parent.height + 10 // Add 10 for shadow
-        source: "assets/toolbar/ToolbarBackground.png"
+        height: menuBar.height + 10 // Add 10 for shadow
+        source: Assets.toolbarBackgroundImage
     }
     delegate: MenuBarDelegate {
     }
@@ -20,10 +23,10 @@ MenuBar {
         title: qsTr("File")
 
         Action {
+            id: newProjectAction
+
             shortcut: "Ctrl+N"
             text: qsTr("New project")
-
-            onTriggered: MenuBarHandler.newProject()
         }
         Action {
             shortcut: "Ctrl+Shift+N"

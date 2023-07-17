@@ -1,0 +1,16 @@
+import QtQuick.tooling 1.2
+
+Module {
+    Component {
+        file: "MenuBarHandler.hpp"
+        name: "MenuBarHandler"
+        accessSemantics: "reference"
+        prototype: "QObject"
+        exports: ["Logic/MenuBarHandler 1.0"]
+        isCreatable: false
+        isSingleton: true
+        exportMetaObjectRevisions: [256]
+        Property { name: "title"; type: "QString"; index: 0 }
+        Method { name: "newProject" }
+    }
+}
