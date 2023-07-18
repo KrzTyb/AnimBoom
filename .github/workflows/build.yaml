@@ -1,0 +1,75 @@
+name: build
+
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main]
+
+env:
+  LANG: en_US.UTF-8
+
+jobs:
+  gcc:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_TYPE: RelWithDebInfo
+    container:
+        image: krztybkrr/animboom:linux
+    steps:
+      - uses: actions/checkout@v3
+        with:
+            submodules: 'true'
+
+      - name: Setup CMake
+        run: >
+          cmake -GNinja -B build
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          -DENABLE_TESTS=ON
+
+      - name: Build
+        run: cmake --build build --config ${{env.BUILD_TYPE}}
+
+      - name: Run CTest
+        run:
+          ctest -C ${{env.BUILD_TYPE}} -j$((`nproc`)) --output-on-failure --test-dir build
+
+  clang-and-linters:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_TYPE: Debug
+    container:
+        image: krztybkrr/animboom:linux
+        env:
+          CXX: /usr/bin/clang++
+          CC: /usr/bin/clang
+    steps:
+      - uses: actions/checkout@v3
+        with:
+            submodules: 'true'
+
+      - name: Setup CMake
+        run: >
+          cmake -GNinja -B build
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          -DENABLE_TESTS=ON
+
+      - name: Build
+        id: build
+        run: cmake --build build --config ${{env.BUILD_TYPE}}
+
+      - name: Run CTest
+        run:
+          ctest -C ${{env.BUILD_TYPE}} -j$((`nproc`)) --output-on-failure --test-dir build
+
+      - name: qmllint
+        if: steps.build.outcome == 'success'
+        run:
+          cmake --build build --config ${{env.BUILD_TYPE}} --target all_qmllint
+
+      - name: clang-tidy
+        if: steps.build.outcome == 'success'
+        run:
+          python3 scripts/clang-tidy-check.py --database build/ -e build
