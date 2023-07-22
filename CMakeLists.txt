@@ -30,7 +30,10 @@ FetchContent_Declare(
     GIT_TAG v0.4.1
 )
 FetchContent_MakeAvailable(Corrosion)
-corrosion_import_crate(MANIFEST_PATH animboom-toolkit/Cargo.toml)
+corrosion_import_crate(
+    MANIFEST_PATH animboom-toolkit/Cargo.toml
+    FEATURES ffi
+)
 corrosion_set_env_vars(animboom-toolkit TOOLKIT_BINDINGS_PATH=${CMAKE_CURRENT_BINARY_DIR}/include/toolkit)
 
 if (${ENABLE_TESTS})
