@@ -3,17 +3,20 @@
 
 import QtQuick
 import QtQuick.Window
+import Utils
 
 Window {
-    height: mainView.height
+    height: Constants.height
     minimumHeight: 400
     minimumWidth: 400
     title: qsTr("AnimBoom Designer")
     visible: true
-    width: mainView.width
+    width: Constants.width
 
     MainView {
         id: mainView
 
+        height: parent.height
+        width: parent.width
     }
 }
